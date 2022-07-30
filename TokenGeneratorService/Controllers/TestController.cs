@@ -1,15 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace TokenGeneratorService.Controllers
 {
     public class TestController : Controller
     {
-        // GET: TestController
+        private readonly ILogger<TokenManagerController> _logger;
+        private IConfiguration _configuration;
+
         public ActionResult Index()
         {
             return View();
