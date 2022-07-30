@@ -33,11 +33,7 @@ namespace TokenGeneratorService.Controllers
 		{
 			try
 			{
-				var settings = _configuration
-									.GetSection("TokenSettings")
-									.GetChildren()
-									.Select(x => x)
-									.ToArray();
+				var settings = _configuration.GetSection("TokenSettings").GetChildren().Select(x => x).ToArray();
 				foreach (IConfigurationSection setting in settings)
 				{
 					if (setting["ApplicationId"] == applicationId)
