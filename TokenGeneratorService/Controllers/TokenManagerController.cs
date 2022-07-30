@@ -36,7 +36,7 @@ namespace TokenGeneratorService.Controllers
 		[Route("generatetoken")]
 		public IActionResult GetGenerateToken(string applicationId, string secret)
 		{
-            try {
+			try {
 				var settings = _configuration
 									.GetSection("TokenSettings")
 									.GetChildren()
