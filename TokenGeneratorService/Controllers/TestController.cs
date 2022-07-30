@@ -15,78 +15,73 @@ namespace TokenGeneratorService.Controllers
         private readonly ILogger<TokenManagerController> _logger;
         private IConfiguration _configuration;
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+		public TokenManagerController(ILogger<TokenManagerController> logger, IConfiguration config)
+		{
+			_logger = logger;
+			_configuration = config;
+		}
 
-        // GET: TestController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+		[HttpGet]
+		public IActionResult Get()
+		{
+			return Ok("Welcome to TokenManagerService!");
+		}
 
-        // GET: TestController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+		[HttpGet]
+		[Route("generatetoken")]
+		public IActionResult GetGenerateToken(string applicationId, string secret)
+		{
+			try
+			{
+				var settings = _configuration
+									.GetSection("TokenSettings")
+									.GetChildren()
+									.Select(x => x)
+									.ToArray();
+				foreach (IConfigurationSection setting in settings)
+				{
+					if (setting["ApplicationId"] == applicationId)
+					{
+						var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
 
-        // POST: TestController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+						// compare with locally stored key
+						var localSecurityKey = setting["SecurityKey"];
+						if (!BitConverter.ToString(securityKey.Key).Equals(localSecurityKey))
+							return Unauthorized();
 
-        // GET: TestController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+						var issuer = setting.GetSection("Issuer").Value;
+						var audience = setting.GetSection("Audience").Value;
+						var tokenHandler = new JwtSecurityTokenHandler();
+						var tokenDescriptor = new SecurityTokenDescriptor
+						{
+							Subject = new ClaimsIdentity(new Claim[]
+								{
+									new Claim(ClaimTypes.NameIdentifier, setting["Application"])
+								}),
+							Expires = DateTime.UtcNow.AddMinutes(int.Parse(setting.GetSection("ExpireMinutes").Value)),
+							Issuer = issuer,
+							Audience = audience,
+							SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
+						};
 
-        // POST: TestController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+						// check if there are any roles attached to app
+						string? strroles = setting["Roles"];
+						if (!string.IsNullOrEmpty(strroles))
+							foreach (string role in strroles.Split(','))
+								tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, role));
 
-        // GET: TestController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+						var token = tokenHandler.CreateToken(tokenDescriptor);
+						return Ok(tokenHandler.WriteToken(token));
+					}
+				}
 
-        // POST: TestController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
+				return Unauthorized();
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+
+		}
+	}
 }
