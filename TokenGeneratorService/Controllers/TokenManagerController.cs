@@ -31,7 +31,7 @@ namespace TokenGeneratorService.Controllers
         {
             return Ok("Welcome to TokenManagerService!");
         }
-		
+
 		[HttpGet]
 		[Route("generatetoken")]
 		public IActionResult GetGenerateToken(string applicationId, string secret)
