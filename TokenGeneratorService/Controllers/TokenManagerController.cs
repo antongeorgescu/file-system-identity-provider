@@ -10,36 +10,32 @@ using Microsoft.Extensions.Configuration;
 
 namespace TokenGeneratorService.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class TokenManagerController : ControllerBase
+    public class TokenManagerController : Controller
     {
         private readonly ILogger<TokenManagerController> _logger;
-		private IConfiguration _configuration;
+        private IConfiguration _configuration;
 
-        public TokenManagerController(ILogger<TokenManagerController> logger, IConfiguration config)
-        {
-            _logger = logger;
+		public TokenManagerController(ILogger<TokenManagerController> logger, IConfiguration config)
+		{
+			_logger = logger;
 			_configuration = config;
 		}
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok("Welcome to TokenManagerService!");
-        }
+		[HttpGet]
+		public IActionResult Get()
+		{
+			return Ok("Welcome to TokenManagerService!");
+		}
 
 		[HttpGet]
 		[Route("generatetoken")]
 		public IActionResult GetGenerateToken(string applicationId, string secret)
 		{
-			try {
-				var settings = _configuration
-									.GetSection("TokenSettings")
-									.GetChildren()
-									.Select(x => x)
-									.ToArray();
-				foreach (IConfigurationSection setting in settings) {
+			try
+			{
+				var settings = _configuration.GetSection("TokenSettings").GetChildren().Select(x => x).ToArray();
+				foreach (IConfigurationSection setting in settings)
+				{
 					if (setting["ApplicationId"] == applicationId)
 					{
 						var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
@@ -69,7 +65,7 @@ namespace TokenGeneratorService.Controllers
 						if (!string.IsNullOrEmpty(strroles))
 							foreach (string role in strroles.Split(','))
 								tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, role));
-					
+
 						var token = tokenHandler.CreateToken(tokenDescriptor);
 						return Ok(tokenHandler.WriteToken(token));
 					}
@@ -78,9 +74,9 @@ namespace TokenGeneratorService.Controllers
 				return Unauthorized();
 			}
 			catch (Exception ex)
-            {
+			{
 				return BadRequest(ex.Message);
-            }
+			}
 
 		}
 	}
