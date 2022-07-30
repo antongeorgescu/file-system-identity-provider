@@ -36,7 +36,7 @@ namespace TokenGeneratorService
             {
                 app.UseDeveloperExceptionPage();
             }
-            //app.UseTokenGenerator();
+            
             app.UseRouting();
 
             app.UseAuthorization();
