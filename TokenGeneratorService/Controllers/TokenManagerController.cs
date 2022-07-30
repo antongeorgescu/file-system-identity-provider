@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using System.Net;
 
 namespace TokenGeneratorService.Controllers
 {
@@ -26,60 +27,64 @@ namespace TokenGeneratorService.Controllers
 		}
 
         [HttpGet]
-        public string Get()
+        public IActionResult Get()
         {
-            return "Welcome to TokenManagerService!";
+            return Ok("Welcome to TokenManagerService!");
         }
 
 		[HttpGet]
 		[Route("generatetoken")]
-		public string GetGenerateToken(string app, string applicationId, string secret)
+		public IActionResult GetGenerateToken(string applicationId, string secret)
 		{
-			//var secret = "asdv234234^&%&^%&^hjsdfb2%%%";
-
-			var settings = _configuration
-								.GetSection("TokenSettings")
-								.GetChildren()
-								.Select(x => x)
-								.ToArray();
-			foreach (IConfigurationSection setting in settings) {
-				if (setting["Application"] == app)
-                {
-					var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
-
-					// compare with locally stored key
-					var localSecurityKey = setting["SecurityKey"];
-					if (!BitConverter.ToString(securityKey.Key).Equals(localSecurityKey))
-						return "401";
-
-					var issuer = setting.GetSection("Issuer").Value;
-					var audience = setting.GetSection("Audience").Value;
-					var tokenHandler = new JwtSecurityTokenHandler();
-					var tokenDescriptor = new SecurityTokenDescriptor
+            try {
+				var settings = _configuration
+									.GetSection("TokenSettings")
+									.GetChildren()
+									.Select(x => x)
+									.ToArray();
+				foreach (IConfigurationSection setting in settings) {
+					if (setting["ApplicationId"] == applicationId)
 					{
-						Subject = new ClaimsIdentity(new Claim[]
-							{
-								new Claim(ClaimTypes.NameIdentifier, applicationId)
-							}),
-						Expires = DateTime.UtcNow.AddMinutes(int.Parse(setting.GetSection("ExpireMinutes").Value)),
-						Issuer = issuer,
-						Audience = audience,
-						SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
-					};
+						var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
 
-					// check if there are any roles attached to app
-					string? strroles = setting["Roles"];
-					if (!string.IsNullOrEmpty(strroles))
-						foreach (string role in strroles.Split(','))
-							tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, role));
+						// compare with locally stored key
+						var localSecurityKey = setting["SecurityKey"];
+						if (!BitConverter.ToString(securityKey.Key).Equals(localSecurityKey))
+							return Unauthorized();
+
+						var issuer = setting.GetSection("Issuer").Value;
+						var audience = setting.GetSection("Audience").Value;
+						var tokenHandler = new JwtSecurityTokenHandler();
+						var tokenDescriptor = new SecurityTokenDescriptor
+						{
+							Subject = new ClaimsIdentity(new Claim[]
+								{
+									new Claim(ClaimTypes.NameIdentifier, setting["Application"])
+								}),
+							Expires = DateTime.UtcNow.AddMinutes(int.Parse(setting.GetSection("ExpireMinutes").Value)),
+							Issuer = issuer,
+							Audience = audience,
+							SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
+						};
+
+						// check if there are any roles attached to app
+						string? strroles = setting["Roles"];
+						if (!string.IsNullOrEmpty(strroles))
+							foreach (string role in strroles.Split(','))
+								tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, role));
 					
-					var token = tokenHandler.CreateToken(tokenDescriptor);
-					return tokenHandler.WriteToken(token);
+						var token = tokenHandler.CreateToken(tokenDescriptor);
+						return Ok(tokenHandler.WriteToken(token));
+						//return StatusCode((int)HttpStatusCode.OK,token);
+					}
 				}
+
+				return Unauthorized();
+			}
+			catch (Exception ex)
+            {
+				return BadRequest(ex.Message);
             }
-
-			return "401";
-
 
 		}
 	}
