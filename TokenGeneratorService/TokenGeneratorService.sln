@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenGeneratorService", "TokenGeneratorService.csproj", "{2A8894E2-2CD5-46D1-9A83-03B5CBE21084}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenGeneratorService", "TokenGeneratorService.csproj", "{4A079985-B1FE-43BE-8BF5-5EC3FB06FDAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MockWebApi", "..\MockWebApi\MockWebApi.csproj", "{503CF357-D02A-439A-AEDC-F696E46CA5CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2A8894E2-2CD5-46D1-9A83-03B5CBE21084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A8894E2-2CD5-46D1-9A83-03B5CBE21084}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A8894E2-2CD5-46D1-9A83-03B5CBE21084}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A8894E2-2CD5-46D1-9A83-03B5CBE21084}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A079985-B1FE-43BE-8BF5-5EC3FB06FDAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A079985-B1FE-43BE-8BF5-5EC3FB06FDAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A079985-B1FE-43BE-8BF5-5EC3FB06FDAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A079985-B1FE-43BE-8BF5-5EC3FB06FDAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{503CF357-D02A-439A-AEDC-F696E46CA5CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{503CF357-D02A-439A-AEDC-F696E46CA5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{503CF357-D02A-439A-AEDC-F696E46CA5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{503CF357-D02A-439A-AEDC-F696E46CA5CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

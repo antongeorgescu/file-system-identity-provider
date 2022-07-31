@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestAspNetWebApi
+namespace MockCbsService
 {
     public class Startup
     {
@@ -38,7 +38,7 @@ namespace TestAspNetWebApi
             app.UseRouting();
 
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
