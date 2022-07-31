@@ -24,3 +24,6 @@ Based on a file system storage file named <b>service.role.access.json</b> that k
 ## References
 * https://www.tutorialsteacher.com/core/aspnet-core-middleware
 * https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/authentication-and-authorization-in-aspnet-web-api
+* https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-3.1
+* https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1
+* https://docs.microsoft.com/en-us/aspnet/core/security/authorization/claims?view=aspnetcore-3.1
