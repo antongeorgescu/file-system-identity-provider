@@ -36,6 +36,9 @@ namespace TestAspNetWebApi.Controllers
         [Route("generatetoken")]
         public IActionResult GenerateToken(string applicationId, string secret)
         {
+            // generate local JWT token in an OpenID format, and with roles attached
+            // for demo purposes all JWT attributes are kept in appsettings.json file, however for real life implementations
+            // they should be kept in a secure data repository
             try
             {
                 var settings = _configuration.GetSection("TokenSettings").GetChildren().Select(x => x).ToArray();
@@ -82,66 +85,6 @@ namespace TestAspNetWebApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
-
-        /*[HttpGet]
-        [Route("decodetoken")]
-        public IActionResult DecodeToken(string token)
-        {
-            // Example: https://sts.windows.net/fa15d692-e9c7-4460-a743-29f29522229/
-            const string AAD_TOKEN_V1 = @"https://sts.windows.net";
-
-            // Example: http://filesysidprovider.com
-            const string SLP_TOKEN_V1 = @"http://filesysidprovider.com";
-
-            // Example: https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/v2.0
-            const string AAD_TOKEN_V2 = @"https://login.microsoftonline.com";
-
-            try
-            {
-                var handler = new JwtSecurityTokenHandler();
-                var jwtSecurityToken = handler.ReadJwtToken(token);
-
-                var issuer = jwtSecurityToken.Claims.First(claim => claim.Type == "iss").Value;
-                var nameid = string.Empty;
-                var strroles = string.Empty;
-                var striss = "unknown";
-                IEnumerable<Claim> roles;
-
-                if (issuer.StartsWith(AAD_TOKEN_V1))
-                {
-                    striss = "azure ad v1.0";
-                    nameid = jwtSecurityToken.Claims.First(claim => claim.Type == "name").Value;
-                    strroles = jwtSecurityToken.Claims.First(claim => claim.Type == "roles").Value;
-                }
-                else if (issuer.StartsWith(AAD_TOKEN_V2))
-                {
-                    striss = "azure ad v2.0";
-                    nameid = jwtSecurityToken.Claims.First(claim => claim.Type == "name").Value;
-                    strroles = jwtSecurityToken.Claims.First(claim => claim.Type == "roles").Value;
-                }
-                else if (issuer.StartsWith(SLP_TOKEN_V1))
-                {
-                    striss = "sl platform v1.0";
-                    var lstroles = new List<string>();
-                    nameid = jwtSecurityToken.Claims.First(claim => claim.Type == "nameid").Value;
-                    roles = jwtSecurityToken.Claims.Where(claim => claim.Type == "role");
-                    foreach (Claim role in roles)
-                        lstroles.Add(role.Value);
-                    strroles = string.Join(",", lstroles);
-                }
-                else
-                    return Unauthorized();
-
-                return Ok($"openid_token:{striss},name_id:{nameid},roles:{strroles}");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-        }*/
-
     }
 }

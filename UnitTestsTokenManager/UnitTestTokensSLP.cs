@@ -1,4 +1,3 @@
-﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,56 +5,35 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+using Xunit;
+using Xunit.Abstractions;
 
-namespace MockCbsService
+namespace UnitTestsTokenManager
 {
-    public class CustomAuthenticationMiddleware
+    public class UnitTestTokensSLP
     {
-        private readonly RequestDelegate next;
+        private readonly ITestOutputHelper output;
 
-        public CustomAuthenticationMiddleware(RequestDelegate next)
+        // Example: https://sts.windows.net/fa15d692-e9c7-4460-a743-29f29522229/
+        const string AAD_TOKEN_V1 = @"https://sts.windows.net";
+        // Example: http://filesysidprovider.com
+        const string SLP_TOKEN_V1 = @"http://filesysidprovider.com";
+        // Example: https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/v2.0
+        const string AAD_TOKEN_V2 = @"https://login.microsoftonline.com";
+
+        public UnitTestTokensSLP(ITestOutputHelper output)
         {
-            this.next = next;
+            this.output = output;
         }
 
-        public async Task Invoke(HttpContext context)
+        [Fact]
+        public void TokenDecode_SLP_V1()
         {
-            string bearer_token = context.Request.Headers["Bearer"];
-
-            //    if (authoriztionHeader != null && authoriztionHeader.StartsWith("Basic"))
-            //    {
-            //        var encodedUsernamePassword = authoriztionHeader.Substring("Basic ".Length).Trim();
-            //        var encoding = Encoding.GetEncoding("iso-8859-1");
-            //        var usernamePassword = encoding.GetString(Convert.FromBase64String(encodedUsernamePassword));
-            //        var seperatorIndex = usernamePassword.IndexOf(':');
-            //        var username = usernamePassword.Substring(0, seperatorIndex);
-            //        var password = usernamePassword.Substring(seperatorIndex + 1);
-
-            //        /*if (GetUsers.GetDatabaseUsers.CheckCredentials(username, password))
-            //        {
-            //            // your additional logic here...
-
-            //            await this.next.Invoke(context);
-            //        }
-            //        else
-            //        {
-            //            context.Response.StatusCode = 401;
-            //        }*/
-            //    }
-            //    else
-            //    {
-            //        context.Response.StatusCode = 401;
-            //    }
-            // Example: https://sts.windows.net/fa15d692-e9c7-4460-a743-29f29522229/
-            const string AAD_TOKEN_V1 = @"https://sts.windows.net";
+            string bearer_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI2OTg2LCJleHAiOjE2NTkyMzQxODYsImlhdCI6MTY1OTIyNjk4NiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.zVwuierZ1l9VZ6zClNC4BAMXzyF91lY-u94c2pQObys";
+            string endpoint_path = "/loanmanager/loanlist";
 
             // Example: http://filesysidprovider.com
             const string SLP_TOKEN_V1 = @"http://filesysidprovider.com";
-
-            // Example: https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/v2.0
-            const string AAD_TOKEN_V2 = @"https://login.microsoftonline.com";
 
             try
             {
@@ -68,6 +46,7 @@ namespace MockCbsService
                 var striss = "unknown";
                 IEnumerable<Claim> roles;
 
+                // extract roles from 3 different types of tokens
                 if (issuer.StartsWith(AAD_TOKEN_V1))
                 {
                     striss = "azure ad v1.0";
@@ -91,29 +70,31 @@ namespace MockCbsService
                     strroles = string.Join(",", lstroles);
                 }
                 else
-                    context.Response.StatusCode = 401;
+                {
+                    throw new Exception("Not accepted JWT type");
+                }
 
                 // check if any role is assigned to respective path
                 var endpointList = LoadServiceRolesJson();
-                var endpointInRole = endpointList.Select(x => x).Where(x => ((x.endpointPath == context.Request.Path.Value) && (strroles.Contains(x.requiredRole))));
-                if (endpointInRole.Count()>0)
-                    await this.next.Invoke(context);
-                else
-                    context.Response.StatusCode = 401;
+                var endpointInRole = endpointList.Select(x => x).Where(x => ((x.endpointPath == endpoint_path) && (strroles.Contains(x.requiredRole))));
+
+                Assert.True(endpointInRole.Count() > 0, "Authorized, go process endpoint");
+
             }
             catch (Exception ex)
             {
-                context.Response.StatusCode = 401;
+                // return 'Unauthorized' for any exception in authorization middleware
+                output.WriteLine("Unauthorized");
             }
         }
 
-        public List<EndpointRole> LoadServiceRolesJson()
+        public static List<EndpointRole> LoadServiceRolesJson()
         {
             var entries = new List<EndpointRole>();
-            using (StreamReader r = new StreamReader(@"auth\serviceroles.json"))
+            using (StreamReader r = new StreamReader(@"auth\service.access.roles.json"))
             {
                 string jsonfile = r.ReadToEnd();
-                
+
                 var jsonstr = JsonConvert.DeserializeObject(jsonfile);
                 foreach (dynamic entry in ((dynamic)jsonstr).endpoints)
                 {
@@ -122,15 +103,9 @@ namespace MockCbsService
                     endpointRole.requiredRole = entry.roles.Value;
                     entries.Add(endpointRole);
                 }
-                    
+
             }
             return entries;
         }
-    }
-
-    public class EndpointRole
-    {
-        public string endpointPath;
-        public string requiredRole;
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MockCbsService
 {
-    public class CustomAuthenticationMiddlewarePipeline
+    public class CustomAuthorizationMiddlewarePipeline
     {
         public void Configure(IApplicationBuilder app)
         {
-            app.UseMyCustomAuthentication();
+            app.UseCustomAuthorization();
         }
     }
 }

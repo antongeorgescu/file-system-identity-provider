@@ -13,7 +13,7 @@ namespace MockCbsService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [MiddlewareFilter(typeof(CustomAuthenticationMiddlewarePipeline))]
+    [MiddlewareFilter(typeof(CustomAuthorizationMiddlewarePipeline))]
     public class LoanManagerController : ControllerBase
     {
         private static readonly string[] Names = new[]

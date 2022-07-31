@@ -12,7 +12,6 @@ using IActionFilter = System.Web.Http.Filters.IActionFilter;
 namespace MockCbsService.Log
 {
     public class LogActionFilter : IActionFilter
-
     {
         public bool AllowMultiple => throw new NotImplementedException();
 
