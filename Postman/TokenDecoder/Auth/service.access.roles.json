@@ -1,8 +1,0 @@
-{
-  "endpoints": [
-    {
-      "endpoint": "/loanmanager/loanlist",
-      "roles": "EggShelver"
-    }
-  ]
-}
