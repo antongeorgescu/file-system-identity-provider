@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -91,12 +93,44 @@ namespace MockCbsService
                 else
                     context.Response.StatusCode = 401;
 
-                await this.next.Invoke(context);
+                // check if any role is assigned to respective path
+                var endpointList = LoadServiceRolesJson();
+                var endpointInRole = endpointList.Select(x => x).Where(x => ((x.endpointPath == context.Request.Path.Value) && (strroles.Contains(x.requiredRole))));
+                if (endpointInRole.Count()>0)
+                    await this.next.Invoke(context);
+                else
+                    context.Response.StatusCode = 401;
             }
             catch (Exception ex)
             {
                 context.Response.StatusCode = 401;
             }
         }
+
+        public List<EndpointRole> LoadServiceRolesJson()
+        {
+            var entries = new List<EndpointRole>();
+            using (StreamReader r = new StreamReader(@"auth\serviceroles.json"))
+            {
+                string jsonfile = r.ReadToEnd();
+                
+                var jsonstr = JsonConvert.DeserializeObject(jsonfile);
+                foreach (dynamic entry in ((dynamic)jsonstr).endpoints)
+                {
+                    var endpointRole = new EndpointRole();
+                    endpointRole.endpointPath = entry.endpoint.Value;
+                    endpointRole.requiredRole = entry.roles.Value;
+                    entries.Add(endpointRole);
+                }
+                    
+            }
+            return entries;
+        }
+    }
+
+    public class EndpointRole
+    {
+        public string endpointPath;
+        public string requiredRole;
     }
 }

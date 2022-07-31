@@ -126,14 +126,15 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:58168/loanmanager?bearer_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+					"raw": "http://localhost:58168/loanmanager/loanlist?bearer_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "58168",
 					"path": [
-						"loanmanager"
+						"loanmanager",
+						"loanlist"
 					],
 					"query": [
 						{

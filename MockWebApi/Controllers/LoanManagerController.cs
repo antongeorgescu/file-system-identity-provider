@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+//using MockCbsService.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 
@@ -11,6 +13,7 @@ namespace MockCbsService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [MiddlewareFilter(typeof(CustomAuthenticationMiddlewarePipeline))]
     public class LoanManagerController : ControllerBase
     {
         private static readonly string[] Names = new[]
@@ -26,8 +29,8 @@ namespace MockCbsService.Controllers
         }
 
         [HttpGet]
-        [MiddlewareFilter(typeof(CustomAuthenticationMiddlewarePipeline))]
-        public IEnumerable<LoanAccount> Get()
+        [Route("loanlist")]
+        public IEnumerable<LoanAccount> GetLoanList()
         {
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new LoanAccount
