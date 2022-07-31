@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "5a335e46-9124-4763-a9ce-66b3b8cb76b9",
+		"name": "SLP Conformed Token",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3864406"
+	},
+	"item": [
+		{
+			"name": "slp-identity-provider-generate-token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:25615/tokenmanager/generatetoken?applicationId=b054da43-1065-42c1-82f3-96076659b137&secret=asdv234234^%26%%26^%%26^hjsdfb2%%%",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25615",
+					"path": [
+						"tokenmanager",
+						"generatetoken"
+					],
+					"query": [
+						{
+							"key": "applicationId",
+							"value": "b054da43-1065-42c1-82f3-96076659b137"
+						},
+						{
+							"key": "secret",
+							"value": "asdv234234^%26%%26^%%26^hjsdfb2%%%"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "slp-identity-provider-decode-token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:25615/tokenmanager/decodetoken?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI2OTg2LCJleHAiOjE2NTkyMzQxODYsImlhdCI6MTY1OTIyNjk4NiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.zVwuierZ1l9VZ6zClNC4BAMXzyF91lY-u94c2pQObys",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25615",
+					"path": [
+						"tokenmanager",
+						"decodetoken"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI2OTg2LCJleHAiOjE2NTkyMzQxODYsImlhdCI6MTY1OTIyNjk4NiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.zVwuierZ1l9VZ6zClNC4BAMXzyF91lY-u94c2pQObys"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "aad-v1-identity-provider-decode-token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:25615/tokenmanager/decodetoken?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9mYTE1ZDY5Mi1lOWM3LTQ0NjAtYTc0My0yOWYyOTU2ZmQ0MjkiLCJpYXQiOjE2NTkyMjA1MzksImV4cCI6bnVsbCwiYXVkIjoiYjE0YTc1MDUtOTZlOS00OTI3LTkxZTgtMDYwMWQwZmM5Y2FhIiwic3ViIjoiNV9KOXJTc3M4LWp2dF9JY3U2dWVSTkw4eFhiOExGNEZzZ19Lb29DMlJKUSIsIm5hbWUiOiJhbHZpYW5kYWxhYnMiLCJlbWFpbCI6ImpjZWNvdHRvQGFsdmlhbmRhbGFicy5iaXoiLCJyb2xlcyI6IkZEQUNvbnRyaWJ1dG9yLEZEQVJlcG9ydGVyIn0.kP1rvvdRtHUR5_5LBepJTbHOcZ7cAT3GHzVg_UZMD_Q",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25615",
+					"path": [
+						"tokenmanager",
+						"decodetoken"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9mYTE1ZDY5Mi1lOWM3LTQ0NjAtYTc0My0yOWYyOTU2ZmQ0MjkiLCJpYXQiOjE2NTkyMjA1MzksImV4cCI6bnVsbCwiYXVkIjoiYjE0YTc1MDUtOTZlOS00OTI3LTkxZTgtMDYwMWQwZmM5Y2FhIiwic3ViIjoiNV9KOXJTc3M4LWp2dF9JY3U2dWVSTkw4eFhiOExGNEZzZ19Lb29DMlJKUSIsIm5hbWUiOiJhbHZpYW5kYWxhYnMiLCJlbWFpbCI6ImpjZWNvdHRvQGFsdmlhbmRhbGFicy5iaXoiLCJyb2xlcyI6IkZEQUNvbnRyaWJ1dG9yLEZEQVJlcG9ydGVyIn0.kP1rvvdRtHUR5_5LBepJTbHOcZ7cAT3GHzVg_UZMD_Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "aad-v2-identity-provider-decode-token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:25615/tokenmanager/decodetoken?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vNzJmOTg4YmYtODZmMS00MWFmLTkxYWItMmQ3Y2QwMTFkYjQ3L3YyLjAiLCJpYXQiOjE2NTkyMjA1MzksImV4cCI6bnVsbCwiYXVkIjoiYjE0YTc1MDUtOTZlOS00OTI3LTkxZTgtMDYwMWQwZmM5Y2FhIiwic3ViIjoiNV9KOXJTc3M4LWp2dF9JY3U2dWVSTkw4eFhiOExGNEZzZ19Lb29DMlJKUSIsIm5hbWUiOiJhbHZpYW5kYWxhYnMiLCJlbWFpbCI6ImpjZWNvdHRvQGFsdmlhbmRhbGFicy5iaXoiLCJyb2xlcyI6IkZEQUNvbnRyaWJ1dG9yLEZEQVJlcG9ydGVyIn0.19RRvNvP5pdxyEAYOadT2RIAqn-Bonx9PTWVAUvJYmA",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25615",
+					"path": [
+						"tokenmanager",
+						"decodetoken"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vNzJmOTg4YmYtODZmMS00MWFmLTkxYWItMmQ3Y2QwMTFkYjQ3L3YyLjAiLCJpYXQiOjE2NTkyMjA1MzksImV4cCI6bnVsbCwiYXVkIjoiYjE0YTc1MDUtOTZlOS00OTI3LTkxZTgtMDYwMWQwZmM5Y2FhIiwic3ViIjoiNV9KOXJTc3M4LWp2dF9JY3U2dWVSTkw4eFhiOExGNEZzZ19Lb29DMlJKUSIsIm5hbWUiOiJhbHZpYW5kYWxhYnMiLCJlbWFpbCI6ImpjZWNvdHRvQGFsdmlhbmRhbGFicy5iaXoiLCJyb2xlcyI6IkZEQUNvbnRyaWJ1dG9yLEZEQVJlcG9ydGVyIn0.19RRvNvP5pdxyEAYOadT2RIAqn-Bonx9PTWVAUvJYmA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mock-cbs-data-request",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:58168/loanmanager?bearer_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58168",
+					"path": [
+						"loanmanager"
+					],
+					"query": [
+						{
+							"key": "bearer_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
