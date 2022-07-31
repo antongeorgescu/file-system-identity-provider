@@ -17,7 +17,7 @@ Middlewares build the request pipeline. The following figure illustrates the ASP
 
 ## Use of Middleware for Authentication & Authorization
 Current projects makes use of .NET Core Middleware Framework for capturing all requests to a controller endpoint, and parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)
-Based on a file system storage file named <b>service.role.access.json</b> that keeps the mapping between the endpoint routing path and the required role, access to the endpoint is permitted or denied.
+Based on a file system storage file named <b>service.access.roles.json</b> that keeps the mapping between the endpoint routing path and the required role, access to the endpoint is permitted or denied.
 
 .NET Core Middleware Framework is a good alternative to <b>action filters</b> and <b>controller policies</b> for authenticating and authorizing endpoint access
 
