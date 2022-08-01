@@ -1,10 +1,10 @@
-# Filesystem Identity Provider
+# Filesystem Identity Provider - PoC
 Local OpenID token provider, hosted in file system, and attachable to any .NET Core (3.1) Web API solution
 
 ## Concept Diagram
 ![Filesystem Identity Provider](https://user-images.githubusercontent.com/6631390/182035145-9bd01e6c-4570-4e72-a296-98719dabf562.jpg)
 
-## Basic .NET Core Web Api Middleware Framework
+## ASP.NET Core Middleware in a Nutshell
 ASP.NET Core introduced a new concept called Middleware. A middleware is a class which is executed on every request in ASP.NET Core application. In the classic ASP.NET, HttpHandlers and HttpModules were part of request pipeline. Middleware is similar to HttpHandlers and HttpModules where both needs to be configured and executed in each request.
 
 Typically, there will be multiple middleware in ASP.NET Core web application. It can be either framework provided middleware, added via NuGet or your own custom middleware. We can set the order of middleware execution in the request pipeline. Each middleware adds or modifies http request and optionally passes control to the next middleware component. The following figure illustrates the execution of middleware components.
@@ -37,21 +37,26 @@ The following picture shows the order of invocation of various action filters
 
 ## Examples of Authentication & Authorization
 Current projects comes with 2 examples of implementation:
-1. Use .NET Core Middleware Framework
+1. Use ASP.NET Core Middleware
 * makes use of .NET Core Middleware Framework for capturing all requests to LoanManager controller endpoints
 * parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)<br/>
 * Based on a file system storage file named <b>service.access.roles.json</b> that keeps the mapping between the endpoint routing path and the required role, access to the endpoint is permitted or denied.<br/>
 
-2. Use .NET Core Action Filters
+2. Use ASP.NET Core Action Filters
 * makes use of .NET Core Action Filters to capture all requests to LoanManager controller endpoints
 * parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)
 * same as before, the mappings between endpoint path and required role are kept in a file system storage file named <b>service.access.roles.json</b>
 
-3. Use .NET Core Policy Based Authorization
+3. Use ASP.NET Core Policy-based Authorization<br/><br/>
+In ASP.NET Core, the policy-based authorization framework is designed to decouple authorization and application logic. Simply put, a policy is an entity devised as a collection of requirements, which themselves are conditions that the current user must meet. The simplest policy is that the user is authenticated, while a common requirement is that the user is associated with a given role. Another common requirement is for the user to have a particular claim or a particular claim with a particular value. In the most general terms, a requirement is an assertion about the user identity that attempts to access a method that holds true.
 
-.NET Core Middleware Framework is a good alternative to <b>action filters</b> and <b>controller policies</b> for authenticating and authorizing endpoint access
+## Assessment
+Based on the current PoC results, we conclude that **ASP.NET Core Middleware** is a good alternative to <b>action filters</b> and <b>policy-based authorization</b> for authenticating and authorizing endpoint access due to a few advantageous design concerns:<br/><br/>
+&nbsp;&nbsp;&nbsp;a) **Middleware** processing happens before the request is routed to the controller endpoint, unlike **action filters** that kick in the processing after the endpoint is hit therefore the short-circuit to the request pipeline happens sooner, with saves in the computing<br/><br/>
+&nbsp;&nbsp;&nbsp;b) **Middleware** processing does not require a **principal object** wherefrom to read the claims, like policy-based authorization does; it reads the claims right from the bearer token, on the context thread<br/>
 
 ## References
+* https://docs.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-3.1
 * https://www.tutorialsteacher.com/core/aspnet-core-middleware
 * https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/authentication-and-authorization-in-aspnet-web-api
 * https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-3.1
