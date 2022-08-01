@@ -22,6 +22,12 @@ namespace MockWebApi.Controllers
             "Johnny Cecotto", "Brad Bracing", "Mary Chilly", "Emilio Cool", "Anthony Mild", "Gregory Warm", "Helmuth Balmy", "John Hot", "Adela Sweltering", "Trudy Scorching"
         };
 
+        private static readonly string[] Delinquents = new[]
+        {
+            "Gigi Mancuso", "Brad Pitt", "Robert Redford", "Joe Chinandella", "Anthony Hopkins", "Gregory Peckios", "Helmuth Rasvantes", "John Guggenheim", "Maris de Risso", "Trudy Alberta"
+        };
+
+
         private readonly ILogger<UserManagerController> _logger;
 
         public UserManagerController(ILogger<UserManagerController> logger)
@@ -40,6 +46,21 @@ namespace MockWebApi.Controllers
             {
                 Name = Names[rng.Next(10)],
                 Age = rng.Next(25, 42)
+            })
+            .ToArray();
+        }
+
+        [HttpGet]
+        [Route("delinquentlist")]
+        [Authorize(Policy = "RequireReporterRole")]
+        public IEnumerable<DelinquentProfile> GetDelinquentList()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new DelinquentProfile
+            {
+                Name = Delinquents[rng.Next(6)],
+                Age = rng.Next(25, 42),
+                LoanBalance = rng.Next(25000, 43000)
             })
             .ToArray();
         }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MockWebApi.ActionFilters;
+using MockWebApi.Auth;
 using MockWebApi.Log;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,14 @@ namespace MockWebApi
         {
             services.AddScoped<RequestLogAttribute>();
             services.AddScoped<CustomAuthorizationAttribute>();
+
+            services.AddSingleton<IAuthorizationHandler, ShouldBeReporterAuthorizationHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireReporterRole",
+                     policy => policy.Requirements.Add(new ShouldBeReporterRequirement()));
+            });
+
             services.AddControllers();
         }
 
@@ -49,4 +59,6 @@ namespace MockWebApi
             });
         }
     }
+
+    
 }
