@@ -78,12 +78,13 @@ namespace UnitTestsTokenManager
                 var endpointInRole = endpointList.Select(x => x).Where(x => ((x.endpointPath == endpoint_path) && (strroles.Contains(x.requiredRole))));
 
                 Assert.True(endpointInRole.Count() > 0, "Authorized, go process endpoint");
-                return;
+            
             }
             catch (Exception ex)
             {
                 // return 'Unauthorized' for any exception in authorization middleware
-                output.WriteLine("Unauthorized");
+                Assert.True(string.IsNullOrEmpty(ex.Message));
+                output.WriteLine(ex.Message);
             }
         }
 
