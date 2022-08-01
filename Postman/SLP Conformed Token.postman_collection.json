@@ -115,7 +115,7 @@
 			"response": []
 		},
 		{
-			"name": "mock-cbs-data-request-with-token-and-required-role",
+			"name": "mock-cbs-loandata-request-with-token-and-required-role",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -147,7 +147,7 @@
 			"response": []
 		},
 		{
-			"name": "mock-cbs-data-request-no-token",
+			"name": "mock-cbs-loandata-request-no-token",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -168,6 +168,65 @@
 					"path": [
 						"loanmanager",
 						"loanlist"
+					],
+					"query": [
+						{
+							"key": "bearer_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mock-cbs-userdata-request-no-token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:58168/usermanager/userlist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58168",
+					"path": [
+						"usermanager",
+						"userlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mock-cbs-userdata-request-with-token-and-required-role",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:58168/usermanager/userlist?bearer_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58168",
+					"path": [
+						"usermanager",
+						"userlist"
 					],
 					"query": [
 						{

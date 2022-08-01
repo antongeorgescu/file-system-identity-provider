@@ -1,8 +1,14 @@
 {
   "endpoints": [
     {
+      // this endpoint is authorized with a middleware pipeline implementation
       "endpoint": "/loanmanager/loanlist",
-      "roles": "EggShelver"
+      "roles": "FDAReporter"
+    },
+    {
+      // this endpoint is authroized with an action filter implementation
+      "endpoint": "/usermanager/userlist",
+      "roles": "FDAReporter"
     }
   ]
 }

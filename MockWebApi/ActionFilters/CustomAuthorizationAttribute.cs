@@ -1,28 +1,27 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
-using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Http.Controllers;
 
-namespace MockWebApi
+namespace MockWebApi.ActionFilters
 {
-    public class CustomAuthorizationMiddleware
+    public class CustomAuthorizationAttribute : IActionFilter
     {
-        private readonly RequestDelegate next;
+        public bool AllowMultiple => throw new NotImplementedException();
 
-        public CustomAuthorizationMiddleware(RequestDelegate next)
+        public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            this.next = next;
-        }
-
-        public async Task Invoke(HttpContext context)
-        {
-            string bearer_token = context.Request.Headers["Bearer"];
+            string bearer_token = filterContext.HttpContext.Request.Headers["Bearer"];
 
             // Example: https://sts.windows.net/fa15d692-e9c7-4460-a743-29f29522229/
             const string AAD_TOKEN_V1 = @"https://sts.windows.net";
@@ -68,28 +67,41 @@ namespace MockWebApi
                     strroles = string.Join(",", lstroles);
                 }
                 else
-                    context.Response.StatusCode = 401;
-
-                // check if any role is assigned to respective path
-                var endpointList = MockWebApi.FileReader.LoadServiceRolesJson();
-                var endpointInRole = endpointList.Select(x => x).Where(x => ((x.endpointPath == context.Request.Path.Value) && (strroles.Contains(x.requiredRole))));
+                {
+                    //filterContext.HttpContext.Response.StatusCode = 401;
+                    // return 'Unauthorized' for any exception in authorization action filter
+                    filterContext.Result = new UnauthorizedObjectResult("Unauthorized request");
+                    return;
+                }
                 
+                // check if any role is assigned to respective path
+                var endpointList = FileReader.LoadServiceRolesJson();
+                var endpointInRole = endpointList.Select(x => x).Where(x => ((x.endpointPath == filterContext.HttpContext.Request.Path.Value) && (strroles.Contains(x.requiredRole))));
+
                 // got to next pipeline step (consume endpoint) if at least one required role has been identified;
                 // otherwise return response with 'Unauthorized'
-                if (endpointInRole.Count()>0)
-                    await this.next.Invoke(context);
-                else
-                    context.Response.StatusCode = 401;
+                if (endpointInRole.Count() == 0)
+                {
+                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                    response.RequestMessage.CreateResponse(HttpStatusCode.Unauthorized);
+                }
             }
             catch (Exception ex)
             {
-                // return 'Unauthorized' for any exception in authorization middleware
-                context.Response.StatusCode = 401;
+                // return 'Unauthorized' for any exception in authorization action filter
+                filterContext.Result = new UnauthorizedObjectResult("Unauthorized request");
+                
             }
         }
 
-        
-    }
+        public void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            
+        }
 
-    
+        public Task<HttpResponseMessage> ExecuteActionFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

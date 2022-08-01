@@ -1,6 +1,6 @@
 using System;
 
-namespace MockCbsService
+namespace MockWebApi
 {
     public class LoanAccount
     {

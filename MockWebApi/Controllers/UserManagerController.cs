@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MockWebApi.ActionFilters;
+using MockWebApi.Log;
 //using MockCbsService.Auth;
 using System;
 using System.Collections.Generic;
@@ -13,32 +15,31 @@ namespace MockWebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [MiddlewareFilter(typeof(CustomAuthorizationMiddlewarePipeline))]
-    public class LoanManagerController : ControllerBase
+    public class UserManagerController : ControllerBase
     {
         private static readonly string[] Names = new[]
         {
             "Johnny Cecotto", "Brad Bracing", "Mary Chilly", "Emilio Cool", "Anthony Mild", "Gregory Warm", "Helmuth Balmy", "John Hot", "Adela Sweltering", "Trudy Scorching"
         };
 
-        private readonly ILogger<LoanManagerController> _logger;
+        private readonly ILogger<UserManagerController> _logger;
 
-        public LoanManagerController(ILogger<LoanManagerController> logger)
+        public UserManagerController(ILogger<UserManagerController> logger)
         {
             _logger = logger;
         }
 
         [HttpGet]
-        [Route("loanlist")]
-        public IEnumerable<LoanAccount> GetLoanList()
+        [Route("userlist")]
+        [ServiceFilter(typeof(RequestLogAttribute))]
+        [ServiceFilter(typeof(CustomAuthorizationAttribute))]
+        public IEnumerable<UserProfile> GetUserList()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new LoanAccount
+            return Enumerable.Range(1, 5).Select(index => new UserProfile
             {
-                Date = DateTime.Now.AddDays(index),
-                LoanBalance = rng.Next(5000, 23000),
-                LoanMonths = rng.Next(15, 37),
-                Name = Names[rng.Next(10)]
+                Name = Names[rng.Next(10)],
+                Age = rng.Next(25, 42)
             })
             .ToArray();
         }

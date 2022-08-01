@@ -5,12 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MockWebApi.ActionFilters;
+using MockWebApi.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MockCbsService
+namespace MockWebApi
 {
     public class Startup
     {
@@ -24,6 +26,8 @@ namespace MockCbsService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<RequestLogAttribute>();
+            services.AddScoped<CustomAuthorizationAttribute>();
             services.AddControllers();
         }
 
@@ -38,7 +42,7 @@ namespace MockCbsService
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

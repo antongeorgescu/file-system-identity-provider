@@ -6,12 +6,10 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
-using IActionFilter = System.Web.Http.Filters.IActionFilter;
 
-namespace MockCbsService.Log
+namespace MockWebApi.Log
 {
-    public class LogActionFilter : IActionFilter
+    public class RequestLogAttribute : IActionFilter
     {
         public bool AllowMultiple => throw new NotImplementedException();
 
