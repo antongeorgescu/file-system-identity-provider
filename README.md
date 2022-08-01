@@ -32,12 +32,14 @@ The following picture shows the location of **action filter execution** in MVC r
 **Note** The main distinction to .NET Middleware Framework is that the action filter is executed after the routing
 
 The following picture shows the order of invocation of various action filters
-
+![Order-of-invocation](https://user-images.githubusercontent.com/6631390/182192112-4b8cfd35-c0a0-4166-83ab-de33fc94ef44.JPG)
 
 
 ## Use Middleware for Authentication & Authorization
-Current projects makes use of .NET Core Middleware Framework for capturing all requests to a controller endpoint, and parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)
+Current projects comes with 2 implementations:
+makes use of .NET Core Middleware Framework for capturing all requests to LoanManager controller endpoints, and parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)
 Based on a file system storage file named <b>service.access.roles.json</b> that keeps the mapping between the endpoint routing path and the required role, access to the endpoint is permitted or denied.
+makes use of .NET Core Action Filters to capture all requests to LoanManager controller endpoints, and parse <b>context</b> object to extract information from request header (including <b>bearer token</b>). Same as before, the mappings between endpoint path and required role are kept in a file system storage file named <b>service.access.roles.json</b>
 
 .NET Core Middleware Framework is a good alternative to <b>action filters</b> and <b>controller policies</b> for authenticating and authorizing endpoint access
 
@@ -47,3 +49,10 @@ Based on a file system storage file named <b>service.access.roles.json</b> that 
 * https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-3.1
 * https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1
 * https://docs.microsoft.com/en-us/aspnet/core/security/authorization/claims?view=aspnetcore-3.1
+* https://github.com/CodeMazeBlog/action-filters-dotnetcore-webapi/tree/end-project
+* https://code-maze.com/action-filters-aspnetcore/
+* https://dev.to/leading-edje/custom-authorization-filters-in-asp-net-web-api-3hnm
+* https://livebook.manning.com/book/asp-net-core-in-action/chapter-13/15
+* https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/authentication-filters
+* https://docs.microsoft.com/en-us/aspnet/core/security/authorization/claims?view=aspnetcore-3.1
+
