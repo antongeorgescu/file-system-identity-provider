@@ -35,7 +35,7 @@ The following picture shows the order of invocation of various action filters
 ![Order-of-invocation](https://user-images.githubusercontent.com/6631390/182192112-4b8cfd35-c0a0-4166-83ab-de33fc94ef44.JPG)
 
 
-## 2 Examples of Authentication & Authorization
+## Examples of Authentication & Authorization
 Current projects comes with 2 examples of implementation:
 1. Use .NET Core Middleware Framework
 * makes use of .NET Core Middleware Framework for capturing all requests to LoanManager controller endpoints
