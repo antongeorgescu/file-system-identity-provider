@@ -35,11 +35,17 @@ The following picture shows the order of invocation of various action filters
 ![Order-of-invocation](https://user-images.githubusercontent.com/6631390/182192112-4b8cfd35-c0a0-4166-83ab-de33fc94ef44.JPG)
 
 
-## Use Middleware for Authentication & Authorization
-Current projects comes with 2 implementations:
-makes use of .NET Core Middleware Framework for capturing all requests to LoanManager controller endpoints, and parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)
-Based on a file system storage file named <b>service.access.roles.json</b> that keeps the mapping between the endpoint routing path and the required role, access to the endpoint is permitted or denied.
-makes use of .NET Core Action Filters to capture all requests to LoanManager controller endpoints, and parse <b>context</b> object to extract information from request header (including <b>bearer token</b>). Same as before, the mappings between endpoint path and required role are kept in a file system storage file named <b>service.access.roles.json</b>
+## 2 Examples of Authentication & Authorization
+Current projects comes with 2 examples of implementation:
+1. Use .NET Core Middleware Framework
+* makes use of .NET Core Middleware Framework for capturing all requests to LoanManager controller endpoints
+* parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)<br/>
+* Based on a file system storage file named <b>service.access.roles.json</b> that keeps the mapping between the endpoint routing path and the required role, access to the endpoint is permitted or denied.<br/>
+
+2. Use .NET Core Action Filters
+* makes use of .NET Core Action Filters to capture all requests to LoanManager controller endpoints
+* parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)
+* same as before, the mappings between endpoint path and required role are kept in a file system storage file named <b>service.access.roles.json</b>
 
 .NET Core Middleware Framework is a good alternative to <b>action filters</b> and <b>controller policies</b> for authenticating and authorizing endpoint access
 
