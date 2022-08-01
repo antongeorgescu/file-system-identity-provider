@@ -62,4 +62,5 @@ Current projects comes with 2 examples of implementation:
 * https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/authentication-filters
 * https://docs.microsoft.com/en-us/aspnet/core/security/authorization/claims?view=aspnetcore-3.1
 * https://dotnetcoretutorials.com/2020/01/15/creating-and-validating-jwt-tokens-in-asp-net-core/
+* https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-3.1
 
