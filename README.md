@@ -26,6 +26,15 @@ There are different filter types:
 * **Exception filters** – They are used to handle exceptions before the response body is populated
 * **Result filters** – They run before and after the execution of the action methods result.
 
+The following picture shows the location of **action filter execution** in MVC request pipeline:
+![action-filter-request-pipeline](https://user-images.githubusercontent.com/6631390/182193199-4ac4c165-45c2-4424-bfc6-80940707ac5c.JPG)
+
+**Note** The main distinction to .NET Middleware Framework is that the action filter is executed after the routing
+
+The following picture shows the order of invocation of various action filters
+
+
+
 ## Use Middleware for Authentication & Authorization
 Current projects makes use of .NET Core Middleware Framework for capturing all requests to a controller endpoint, and parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)
 Based on a file system storage file named <b>service.access.roles.json</b> that keeps the mapping between the endpoint routing path and the required role, access to the endpoint is permitted or denied.
