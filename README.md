@@ -47,6 +47,8 @@ Current projects comes with 2 examples of implementation:
 * parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)
 * same as before, the mappings between endpoint path and required role are kept in a file system storage file named <b>service.access.roles.json</b>
 
+3. Use .NET Core Policy Based Authorization
+
 .NET Core Middleware Framework is a good alternative to <b>action filters</b> and <b>controller policies</b> for authenticating and authorizing endpoint access
 
 ## References
