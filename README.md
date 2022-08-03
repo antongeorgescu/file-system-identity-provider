@@ -33,7 +33,14 @@ The following picture shows the order of invocation of various action filters
 ![Order-of-invocation](https://user-images.githubusercontent.com/6631390/182192112-4b8cfd35-c0a0-4166-83ab-de33fc94ef44.JPG)
 
 ## ASP.NET Policy-based Authorization
-In ASP.NET Core, the policy-based authorization framework is designed to decouple authorization and application logic. Simply put, a policy is an entity devised as a *collection of requirements*, which themselves are conditions that the current user must meet. The simplest policy is that the user is authenticated, while a common requirement is that the user is associated with a given role. Another common requirement is for the user to have a particular claim or a particular claim with a particular value. In the most general terms, a requirement is an assertion about the user identity that attempts to access a method that holds true.
+An authorization policy is a set of requirements and handlers. These requirements define what a request user need to satisfy inorder to proceed further. The respective handlers define how these requirements are processed when a request is made and what action needs to be presented if a rule is satisfied or failed. These requirements and handlers are registered in the Startup when the application bootstraps.
+
+A Policy constitutes:
+
+* A Requirement that defines some criterion for Authorization
+* An AuthorizationHandler that validates the Requirement
+
+Once a policy is defined and registered, the runtime applies these policies for validation at the endpoints where the policies are decorated with. When we have these policies in force, we can ensure that the APIs are further secured on top of Authentication and only the set of Authorized users who satisfy these policies are allowed access, else are forbidden (403) from access.
 
 ## Examples of Authentication & Authorization
 Current projects comes with 2 examples of implementation:
@@ -48,9 +55,22 @@ Current projects comes with 2 examples of implementation:
 * same as before, the mappings between endpoint path and required role are kept in a file system storage file named <b>service.access.roles.json</b>
 
 3. Use ASP.NET Core Policy-based Authorization
-* makes use of .NET Core Action Filters to capture all requests to LoanManager controller endpoints
-* parse <b>context</b> object to extract information from request header (including <b>bearer token</b>)
+* our claims-based authorization use a requirement, a requirement handler, and a preconfigured policy. 
+* the primary service that determines if authorization is successful is IAuthorizationService
+* IAuthorizationRequirement is a marker service with no methods, and the mechanism for tracking whether authorization is successful.
+* each IAuthorizationHandler is responsible for checking if requirements are met:
 * same as before, the mappings between endpoint path and required role are kept in a file system storage file named <b>service.access.roles.json</b>
+
+4. Authentication Scheme
+
+* The authentication scheme can select which authentication handler is responsible for generating the correct set of claims. 
+* An authentication scheme is a name that corresponds to:<br/>
+&nbsp;&nbsp;&nbsp;(i) An authentication handler.<br/>
+&nbsp;&nbsp;&nbsp;(ii) Options for configuring that specific instance of the handler.<br/>
+
+* Schemes are useful as a mechanism for referring to the authentication, challenge, and forbid behaviors of the associated handler. For example, an authorization policy can use scheme names to specify which authentication scheme (or schemes) should be used to authenticate the user. When configuring authentication, it's common to specify the default authentication scheme. The default scheme is used unless a resource requests a specific scheme. It's also possible to:<br/>
+&nbsp;&nbsp;&nbsp;(i) Specify different default schemes to use for authenticate, challenge, and forbid actions.<br/>
+&nbsp;&nbsp;&nbsp;(ii) Combine multiple schemes into one using policy schemes.<br/>
 
 ## Assessment
 Based on the current PoC results, we conclude that **ASP.NET Core Middleware** is a good alternative to <b>action filters</b> and <b>policy-based authorization</b> for authenticating and authorizing endpoint access due to a few advantageous design concerns:<br/><br/>
@@ -62,6 +82,8 @@ Based on the current PoC results, we conclude that **ASP.NET Core Middleware** i
 ## References
 * https://docs.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-3.1
 * https://www.tutorialsteacher.com/core/aspnet-core-middleware
+* https://dev.to/dotnet/authentication-in-asp-net-core-59k8
+* https://referbruv.com/blog/implementing-policy-based-authorization-in-aspnet-core-getting-started/
 * https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/authentication-and-authorization-in-aspnet-web-api
 * https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-3.1
 * https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1
