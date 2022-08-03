@@ -52,9 +52,10 @@ namespace MockWebApi.Controllers
 
         [HttpGet]
         [Route("delinquentlist")]
-        [Authorize(Policy = "RequireReporterRole")]
+        [Authorize]
         public IEnumerable<DelinquentProfile> GetDelinquentList()
         {
+            // this endpoint can be executed only by a request with a valid Jwt token (i.e. compliant to the scheme specified in Startup.cs)
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new DelinquentProfile
             {
