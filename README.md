@@ -71,4 +71,5 @@ Based on the current PoC results, we conclude that **ASP.NET Core Middleware** i
 * https://dotnetcoretutorials.com/2020/01/15/creating-and-validating-jwt-tokens-in-asp-net-core/
 * https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-3.1
 * https://referbruv.com/blog/implementing-policy-based-authorization-in-aspnet-core-getting-started/
+* https://blog.devgenius.io/jwt-bearer-authentication-for-machine-to-machine-and-single-page-applications-1c8ba1211a90
 
