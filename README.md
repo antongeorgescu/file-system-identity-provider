@@ -42,6 +42,8 @@ A Policy constitutes:
 
 Once a policy is defined and registered, the runtime applies these policies for validation at the endpoints where the policies are decorated with. When we have these policies in force, we can ensure that the APIs are further secured on top of Authentication and only the set of Authorized users who satisfy these policies are allowed access, else are forbidden (403) from access.
 
+![policy-requirements-handlers](https://user-images.githubusercontent.com/6631390/182645076-a73dbeaa-f14e-416a-88d5-d72d70a19077.JPG)
+
 ## Examples of Authentication & Authorization
 Current projects comes with 2 examples of implementation:
 1. Use ASP.NET Core Middleware
