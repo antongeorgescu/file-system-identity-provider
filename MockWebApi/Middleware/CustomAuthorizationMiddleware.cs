@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MockWebApi
+namespace MockWebApi.Middleware
 {
     public class CustomAuthorizationMiddleware
     {

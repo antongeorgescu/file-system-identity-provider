@@ -1,18 +1,15 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using MockWebApi.ActionFilters;
-using MockWebApi.Auth;
 using MockWebApi.Log;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MockWebApi.Policy;
+using System.Text;
 
 namespace MockWebApi
 {
@@ -31,14 +28,31 @@ namespace MockWebApi
             services.AddScoped<RequestLogAttribute>();
             services.AddScoped<CustomAuthorizationAttribute>();
 
-            services.AddSingleton<IAuthorizationHandler, ShouldBeReporterAuthorizationHandler>();
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireReporterRole",
-                     policy => policy.Requirements.Add(new ShouldBeReporterRequirement()));
-            });
+            // Replace the default authorization policy provider with our own
+            // custom provider which can return authorization policies for given
+            // policy names (instead of using the default policy provider)
+            services.AddSingleton<IAuthorizationPolicyProvider, RoleRequiredPolicyProvider>();
 
+            // As always, handlers must be provided for the requirements of the authorization policies
+            services.AddSingleton<IAuthorizationHandler, RoleRequiredAuthorizationHandler>();
+            
             services.AddControllers();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters =
+                        new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                        {
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF32.GetBytes(Configuration["Jwt:PrivateKey"])),
+                            ValidAudience = "http://filesysidprovider.eggs.com",
+                            ValidIssuer = "http://filesysidprovider.com",
+                            RequireExpirationTime = true,
+                            RequireAudience = true,
+                            ValidateIssuer = true,
+                            ValidateAudience = true
+                        };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

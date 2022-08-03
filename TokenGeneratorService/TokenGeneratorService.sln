@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenGeneratorService", "To
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MockWebApi", "..\MockWebApi\MockWebApi.csproj", "{503CF357-D02A-439A-AEDC-F696E46CA5CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestsTokenManager", "..\UnitTestsTokenManager\UnitTestsTokenManager.csproj", "{21127F33-F450-4854-810B-B79BB59FE784}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestsTokenManager", "..\UnitTestsTokenManager\UnitTestsTokenManager.csproj", "{21127F33-F450-4854-810B-B79BB59FE784}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

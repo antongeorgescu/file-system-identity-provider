@@ -2,7 +2,7 @@
   "endpoints": [
     {
       "endpoint": "/loanmanager/loanlist",
-      "roles": "EggShelver"
+      "roles": "Controller"
     }
   ]
 }

@@ -9,36 +9,37 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
+using MockWebApi.Policy;
 
 namespace MockWebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [MiddlewareFilter(typeof(CustomAuthorizationMiddlewarePipeline))]
-    public class LoanManagerController : ControllerBase
+    public class BankManagerController : ControllerBase
     {
+        private readonly ILogger<BankManagerController> _logger;
+
         private static readonly string[] Names = new[]
         {
             "Johnny Cecotto", "Brad Bracing", "Mary Chilly", "Emilio Cool", "Anthony Mild", "Gregory Warm", "Helmuth Balmy", "John Hot", "Adela Sweltering", "Trudy Scorching"
         };
 
-        private readonly ILogger<LoanManagerController> _logger;
-
-        public LoanManagerController(ILogger<LoanManagerController> logger)
+        public BankManagerController(ILogger<BankManagerController> logger)
         {
             _logger = logger;
         }
 
         [HttpGet]
-        [Route("loanlist")]
-        public IEnumerable<LoanAccount> GetLoanList()
+        [Route("bankaccountslist")]
+        [ContributorRoleAuthorize("Controller")]
+        public IEnumerable<BankAccount> GetLoanList()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new LoanAccount
+            return Enumerable.Range(1, 5).Select(index => new BankAccount
             {
                 Date = DateTime.Now.AddDays(index),
                 LoanBalance = rng.Next(5000, 23000),
-                LoanMonths = rng.Next(15, 37),
+                Account = rng.Next(15000, 15999),
                 Name = Names[rng.Next(10)]
             })
             .ToArray();
