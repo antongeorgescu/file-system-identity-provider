@@ -4,7 +4,7 @@ Local OpenID token provider, hosted in file system, and attachable to any .NET C
 ## Concept Diagram
 ![Filesystem Identity Provider](https://user-images.githubusercontent.com/6631390/182035145-9bd01e6c-4570-4e72-a296-98719dabf562.jpg)
 
-## ASP.NET Core Middleware in a Nutshell
+## ASP.NET Core Web API Middleware
 ASP.NET Core introduced a new concept called Middleware. A middleware is a class which is executed on every request in ASP.NET Core application. In the classic ASP.NET, HttpHandlers and HttpModules were part of request pipeline. Middleware is similar to HttpHandlers and HttpModules where both needs to be configured and executed in each request.
 
 Typically, there will be multiple middleware in ASP.NET Core web application. It can be either framework provided middleware, added via NuGet or your own custom middleware. We can set the order of middleware execution in the request pipeline. Each middleware adds or modifies http request and optionally passes control to the next middleware component. The following figure illustrates the execution of middleware components.
@@ -15,7 +15,7 @@ Middlewares build the request pipeline. The following figure illustrates the ASP
 
 ![Middleware Request Processing](https://user-images.githubusercontent.com/6631390/182035434-22b3119c-99a8-43ee-99e1-8f901bb0a878.JPG)
 
-## ASP.NET Core Web Api Action Filters
+## ASP.NET Core Web API Action Filters
 Filters in .NET offer a great way to hook into the MVC action invocation pipeline. These filters to extract code that can be reused and make the actions cleaner and maintainable. There are some filters that are already provided by ASP.NET Core like the authorization filter, and there are the custom ones that we can create ourselves.
 
 There are different filter types:
@@ -32,7 +32,7 @@ The following picture shows the location of **action filter execution** in MVC r
 The following picture shows the order of invocation of various action filters
 ![Order-of-invocation](https://user-images.githubusercontent.com/6631390/182192112-4b8cfd35-c0a0-4166-83ab-de33fc94ef44.JPG)
 
-## ASP.NET Policy-based Authorization
+## ASP.NET Core Web API Policy-based Authorization
 An authorization policy is a set of requirements and handlers. These requirements define what a request user need to satisfy inorder to proceed further. The respective handlers define how these requirements are processed when a request is made and what action needs to be presented if a rule is satisfied or failed. These requirements and handlers are registered in the Startup when the application bootstraps.
 
 A Policy constitutes:
