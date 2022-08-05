@@ -85,6 +85,7 @@ Based on the current PoC results, we conclude that **ASP.NET Core Middleware** i
 * https://docs.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-3.1
 * https://www.tutorialsteacher.com/core/aspnet-core-middleware
 * https://dev.to/dotnet/authentication-in-asp-net-core-59k8
+* https://medium.com/dataseries/public-claims-and-how-to-validate-a-jwt-1d6c81823826
 * https://referbruv.com/blog/implementing-policy-based-authorization-in-aspnet-core-getting-started/
 * https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/authentication-and-authorization-in-aspnet-web-api
 * https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-3.1
