@@ -41,7 +41,7 @@ namespace TestAspNetWebApi.Controllers
             // they should be kept in a secure data repository
             try
             {
-                var settings = _configuration.GetSection("TokenSettings").GetChildren().Select(x => x).ToArray();
+                var settings = _configuration.GetSection("TokenSettingsPoc").GetChildren().Select(x => x).ToArray();
                 foreach (IConfigurationSection setting in settings)
                 {
                     if (setting["ApplicationId"] == applicationId)
