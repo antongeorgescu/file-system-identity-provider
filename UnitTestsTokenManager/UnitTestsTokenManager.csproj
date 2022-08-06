@@ -19,6 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="..\..\DH.StudentLending.PoCs\SLPlatformLocalIdentityProvider\TokenGeneratorService\DepvalTokenGenerator\DependencyValidation1.layerdiagram" Link="DependencyValidation1.layerdiagram">
+      <Visible>False</Visible>
+    </AdditionalFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
     <PackageReference Include="TokenGenerator.Jwt" Version="1.0.2" />

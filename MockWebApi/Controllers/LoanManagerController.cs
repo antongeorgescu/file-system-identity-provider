@@ -14,6 +14,7 @@ namespace MockWebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Policy="DefaultPolicy")]
     [MiddlewareFilter(typeof(CustomAuthorizationMiddlewarePipeline))]
     public class LoanManagerController : ControllerBase
     {

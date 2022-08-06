@@ -15,6 +15,7 @@ namespace MockWebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Policy = "DefaultPolicy")]
     public class UserManagerController : ControllerBase
     {
         private static readonly string[] Names = new[]

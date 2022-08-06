@@ -15,6 +15,7 @@ namespace MockWebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Policy = "DefaultPolicy")]
     public class BankManagerController : ControllerBase
     {
         private readonly ILogger<BankManagerController> _logger;

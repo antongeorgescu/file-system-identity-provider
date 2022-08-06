@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using MockWebApi.AuthorizationStore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -71,7 +72,7 @@ namespace MockWebApi.Middleware
                     context.Response.StatusCode = 401;
 
                 // check if any role is assigned to respective path
-                var endpointList = MockWebApi.FileReader.LoadServiceRolesJson();
+                var endpointList = ServiceRoles.LoadServiceRolesJson();
                 var endpointInRole = endpointList.Select(x => x).Where(x => ((x.endpointPath == context.Request.Path.Value) && (strroles.Contains(x.requiredRole))));
                 
                 // got to next pipeline step (consume endpoint) if at least one required role has been identified;
