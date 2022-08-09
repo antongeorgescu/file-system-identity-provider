@@ -1,0 +1,8 @@
+{
+  "endpoints": [
+    {
+      "endpoint": "/loanmanager/loanlist",
+      "roles" :  "Approver"
+    }
+  ]
+}
