@@ -5,7 +5,7 @@ Local OpenID token provider, hosted in file system, and attachable to any .NET C
 ![Filesystem Identity Provider](https://user-images.githubusercontent.com/6631390/182035145-9bd01e6c-4570-4e72-a296-98719dabf562.jpg)
 
 ## Filesystem Authrorization Provider - Components and Authrorization Flow
-![SLP Identity Provider - Components   Flow (Github)](https://user-images.githubusercontent.com/6631390/183498279-b5c2180d-f287-4f1f-88dc-cdf7c9959604.jpg)
+![SLP Identity Provider - Components   Flow (Github)](https://user-images.githubusercontent.com/6631390/183655277-4bc44b51-ca3a-48af-938e-975db941212b.jpg)
 
 ## ASP.NET Core Web API Middleware
 ASP.NET Core introduced a new concept called Middleware. A middleware is a class which is executed on every request in ASP.NET Core application. In the classic ASP.NET, HttpHandlers and HttpModules were part of request pipeline. Middleware is similar to HttpHandlers and HttpModules where both needs to be configured and executed in each request.
