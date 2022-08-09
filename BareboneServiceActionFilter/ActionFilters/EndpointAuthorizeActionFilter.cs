@@ -32,7 +32,7 @@ namespace BareboneServiceActionFilter.ActionFilters
 
                 var handler = new JwtSecurityTokenHandler();
                 var jwtSecurityToken = handler.ReadJwtToken(bearer_token);
-                var strroles =  jwtSecurityToken.Claims.First(claim => claim.Type == "roles").Value;
+                var strroles =  jwtSecurityToken.Claims.First(claim => claim.Type == "Role").Value;
 
                 var endpointInRole = endpointList.Select(x => x).Where(x => ((x.endpointPath == context.HttpContext.Request.Path.Value) && (strroles.Contains(x.requiredRole))));
 
@@ -41,8 +41,8 @@ namespace BareboneServiceActionFilter.ActionFilters
                 if (endpointInRole.Count() > 0)
                     await next();
                 else
-                    //context.HttpContext.Response.StatusCode = 401;
-                    context.Result = new ForbidResult();
+                    context.HttpContext.Response.StatusCode = 401;
+                    
             }
             else await next();
         }

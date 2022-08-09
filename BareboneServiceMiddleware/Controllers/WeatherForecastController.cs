@@ -33,9 +33,6 @@ namespace BareboneServiceMiddleware.Controllers
         [Route("dailyforecast")]
         public async Task<object> GetDaily()
         {
-            var allowed = await _authorization.AuthorizeAsync(User, "HasProtectedAccess");
-            if (!allowed.Succeeded)
-                return Unauthorized();
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new DailyForecast
             {
@@ -51,10 +48,6 @@ namespace BareboneServiceMiddleware.Controllers
 
         public async Task<object> GetHourly()
         {
-            var allowed = await _authorization.AuthorizeAsync(User, "HasProtectedAccess");
-            if (!allowed.Succeeded)
-                return Unauthorized();
-
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new HourlyForecast
             {

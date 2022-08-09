@@ -47,7 +47,7 @@ namespace BareboneServiceActionFilter.Controllers
 
         [HttpGet]
         [Route("hourlyforecast")]
-
+        [EndpointAuthorize]
         public async Task<object> GetHourly()
         {
             var rng = new Random();

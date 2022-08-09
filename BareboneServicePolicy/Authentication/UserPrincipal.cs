@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace BareboneServicePolicy
+namespace BareboneServicePolicy.Authentication
 {
     public static class UserSettings
     {

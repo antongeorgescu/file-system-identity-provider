@@ -29,7 +29,7 @@ namespace BareboneServiceMiddleware
             const string AAD_TOKEN_V1 = @"https://sts.windows.net";
 
             // Example: http://filesysidprovider.com
-            const string SLP_TOKEN_V1 = @"http://filesysidprovider.com";
+            const string SLP_TOKEN_V1 = @"https://alviandalabs.slp.com/4321431432";
 
             // Example: https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/v2.0
             const string AAD_TOKEN_V2 = @"https://login.microsoftonline.com";
@@ -46,24 +46,24 @@ namespace BareboneServiceMiddleware
                 IEnumerable<Claim> roles;
 
                 // extract roles from 3 different types of tokens
-                if (issuer.StartsWith(AAD_TOKEN_V1))
+                if (issuer.Contains(AAD_TOKEN_V1))
                 {
                     striss = "azure ad v1.0";
                     nameid = jwtSecurityToken.Claims.First(claim => claim.Type == "name").Value;
                     strroles = jwtSecurityToken.Claims.First(claim => claim.Type == "roles").Value;
                 }
-                else if (issuer.StartsWith(AAD_TOKEN_V2))
+                else if (issuer.Contains(AAD_TOKEN_V2))
                 {
                     striss = "azure ad v2.0";
                     nameid = jwtSecurityToken.Claims.First(claim => claim.Type == "name").Value;
                     strroles = jwtSecurityToken.Claims.First(claim => claim.Type == "roles").Value;
                 }
-                else if (issuer.StartsWith(SLP_TOKEN_V1))
+                else if (issuer.Contains(SLP_TOKEN_V1))
                 {
                     striss = "sl platform v1.0";
                     var lstroles = new List<string>();
-                    nameid = jwtSecurityToken.Claims.First(claim => claim.Type == "nameid").Value;
-                    roles = jwtSecurityToken.Claims.Where(claim => claim.Type == "role");
+                    nameid = jwtSecurityToken.Claims.First(claim => claim.Type == "NameId").Value;
+                    roles = jwtSecurityToken.Claims.Where(claim => claim.Type == "Role");
                     foreach (Claim role in roles)
                         lstroles.Add(role.Value);
                     strroles = string.Join(",", lstroles);

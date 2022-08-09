@@ -30,15 +30,15 @@ namespace BareboneServicePolicy.Controllers
             _authorization = authorizationService;
         }
 
+        
         [HttpGet]
         [Route("dailyforecast")]
-        //[Authorize(Policy = "HasProtectedAccess")]
-        //public IEnumerable<DailyForecast> GetDaily()
+        [Authorize(Policy = "HasProtectedAccess")]
         public async Task<object> GetDaily()
         {
-            var allowed = await _authorization.AuthorizeAsync(User, "HasProtectedAccess");
-            if (!allowed.Succeeded)
-                return Unauthorized();
+            //var allowed = await _authorization.AuthorizeAsync(User, "HasProtectedAccess");
+            //if (!allowed.Succeeded)
+            //    return Unauthorized();
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new DailyForecast
             {
@@ -51,7 +51,6 @@ namespace BareboneServicePolicy.Controllers
 
         [HttpGet]
         [Route("hourlyforecast")]
-
         public async Task<object> GetHourly()
         {
             var allowed = await _authorization.AuthorizeAsync(User, "HasProtectedAccess");
