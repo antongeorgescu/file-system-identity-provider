@@ -12,8 +12,8 @@ namespace BareboneServicePolicy.Authentication
     {
         public const string Issuer = "iss";
         public const string Audience = "aud";
-        public const string Name = "Surname";
-        public const string NameIdentifier = "GivenName";
+        public const string Name = "Name";
+        public const string NameIdentifier = "NameId";
         public const string UserEmail = "Email";
     }
 
