@@ -115,32 +115,29 @@
 			"response": []
 		},
 		{
-			"name": "mock-cbs-loandata-request-with-token-and-required-role",
+			"name": "barebone_service-request-with-token-and-required-role",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Bearer",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FsdmlhbmRhbGFicy5zbHAuY29tLzQzMjE0MzE0MzIiLCJpYXQiOjE2NTk5MTI4MzksImV4cCI6MTY5MTQ0ODgzOSwiYXVkIjoiZWYxZGE5ZDQtZmY3Ny00YzNlLWEwMDUtODQwYzNmODMwNzQ1Iiwic3ViIjoidGVzdC1wb2xpY3ktYmFzZWQtYXV0aG9yaXphdGlvbi1pbi13ZWItYXBpIiwiR2l2ZW5OYW1lIjoiSm9obm55IiwiU3VybmFtZSI6IlJvY2tldCIsIkVtYWlsIjoianJvY2tldEBleGFtcGxlLmNvbSIsIlJvbGUiOlsiTWFuYWdlciIsIlByb2plY3QgQWRtaW5pc3RyYXRvciJdLCJTY29wZSI6Im15YXBpOnByb3RlY3RlZC1hY2Nlc3MifQ.QMjU7VYru4yWlZx8aVXcoH-ibtoMM727u_VwiSQercA",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:58168/loanmanager/loanlist?bearer_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+					"raw": "http://localhost:2141/weatherforecast/daylyforecast",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "58168",
+					"port": "2141",
 					"path": [
-						"loanmanager",
-						"loanlist"
-					],
-					"query": [
-						{
-							"key": "bearer_token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8"
-						}
+						"weatherforecast",
+						"daylyforecast"
 					]
 				}
 			},
@@ -265,6 +262,147 @@
 							"key": "bearer_token",
 							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "custom-policy-provider-sign-in",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:22988/account/signin?userName=antongeorgescu&birthDate=26-Jun-1960",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "22988",
+					"path": [
+						"account",
+						"signin"
+					],
+					"query": [
+						{
+							"key": "userName",
+							"value": "antongeorgescu"
+						},
+						{
+							"key": "birthDate",
+							"value": "26-Jun-1960"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "custom-policy-provider-request-minage10",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:22988/home/minage10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "22988",
+					"path": [
+						"home",
+						"minage10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fda-cbs-getbatches-request-with-token-and-required-role",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:57991/disbursement/batches",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57991",
+					"path": [
+						"disbursement",
+						"batches"
+					],
+					"query": [
+						{
+							"key": "bearer_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJGREEiLCJyb2xlIjpbIkZEQUNvbnRyaWJ1dG9yIiwiRkRBUmVwb3J0ZXIiXSwibmJmIjoxNjU5MjI3MDM2LCJleHAiOjE2NTkyMzQyMzYsImlhdCI6MTY1OTIyNzAzNiwiaXNzIjoiaHR0cDovL2ZpbGVzeXNpZHByb3ZpZGVyLmNvbSIsImF1ZCI6Imh0dHA6Ly9maWxlc3lzaWRwcm92aWRlci5mZGEuY29tIn0.2Iao0DqXF9LnF3K3XG9ZF0XDZDnfLZwqsj3hhcNTai8",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "barebone-service-daily-request-with-token-and-required-role",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FsdmlhbmRhbGFicy5zbHAuY29tLzQzMjE0MzE0MzIiLCJpYXQiOjE2NTk5MTI4MzksImV4cCI6MTY5MTQ0ODgzOSwiYXVkIjoiZWYxZGE5ZDQtZmY3Ny00YzNlLWEwMDUtODQwYzNmODMwNzQ1Iiwic3ViIjoidGVzdC1wb2xpY3ktYmFzZWQtYXV0aG9yaXphdGlvbi1pbi13ZWItYXBpIiwiTmFtZSI6ImVjZS1wb3J0YWwiLCJOYW1lSWQiOiIxZDkwMjI5OC03NzM1LTQyZGUtOWVjNi0zMDEzZDc2ODlmZGMiLCJFbWFpbCI6ImVjZXBvcnRhbEBzdHVkZW50bGVuZGluZy5jb20iLCJSb2xlIjpbIkFwcHJvdmVyIiwiUmVwb3J0ZXIiXSwiU2NvcGUiOiJteWFwaTpwcm90ZWN0ZWQtYWNjZXNzIn0.MSc7IxKAeWaCu9mJw4IytqINAYu76u-ttXhOF5Ti73M",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:2141/weatherforecast/dailyforecast",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2141",
+					"path": [
+						"weatherforecast",
+						"dailyforecast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "barebone-service-hourly-request-with-token-and-required-role",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FsdmlhbmRhbGFicy5zbHAuY29tLzQzMjE0MzE0MzIiLCJpYXQiOjE2NTk5MTI4MzksImV4cCI6MTY5MTQ0ODgzOSwiYXVkIjoiZWYxZGE5ZDQtZmY3Ny00YzNlLWEwMDUtODQwYzNmODMwNzQ1Iiwic3ViIjoidGVzdC1wb2xpY3ktYmFzZWQtYXV0aG9yaXphdGlvbi1pbi13ZWItYXBpIiwiTmFtZSI6ImVjZS1wb3J0YWwiLCJOYW1lSWQiOiIxZDkwMjI5OC03NzM1LTQyZGUtOWVjNi0zMDEzZDc2ODlmZGMiLCJFbWFpbCI6ImVjZXBvcnRhbEBzdHVkZW50bGVuZGluZy5jb20iLCJSb2xlIjpbIkFwcHJvdmVyIiwiUmVwb3J0ZXIiXSwiU2NvcGUiOiJteWFwaTpwcm90ZWN0ZWQtYWNjZXNzIn0.MSc7IxKAeWaCu9mJw4IytqINAYu76u-ttXhOF5Ti73M",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:2141/weatherforecast/hourlyforecast",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2141",
+					"path": [
+						"weatherforecast",
+						"hourlyforecast"
 					]
 				}
 			},
