@@ -110,3 +110,6 @@ Based on the current PoC results, we conclude that **ASP.NET Core Middleware** i
 * https://blog.devgenius.io/jwt-bearer-authentication-for-machine-to-machine-and-single-page-applications-1c8ba1211a90
 * https://docs.microsoft.com/en-us/archive/msdn-magazine/2017/october/cutting-edge-policy-based-authorization-in-asp-net-core
 
+### Andrew Lock | .NET Escapades
+* https://andrewlock.net/introduction-to-authentication-with-asp-net-core/
+* https://andrewlock.net/exploring-the-cookieauthenticationmiddleware-in-asp-net-core/
