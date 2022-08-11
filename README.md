@@ -9,7 +9,7 @@ Local OpenID token provider, hosted in file system, and attachable to any .NET C
 
 ## Role Mapper
 The following diagram shows a few cases of role mapping between *caller user principal roles* and *callee service principal roles*. Actually SLP.Authorization.Adapter is transforming a UPN into an SPN, with a role adaptation at its core
-![Identity Authorize Adapter - Role Mapper](https://user-images.githubusercontent.com/6631390/183882701-f5431cb9-ed98-45b5-94fc-a674a8b6dbf7.jpg)
+![Identity Authorize Adapter - Role Mapper](https://user-images.githubusercontent.com/6631390/184161872-e61e1960-9803-4ce3-80f4-df9218d9db6e.jpg)
 
 ## ASP.NET Core Web API Middleware
 ASP.NET Core introduced a new concept called Middleware. A middleware is a class which is executed on every request in ASP.NET Core application. In the classic ASP.NET, HttpHandlers and HttpModules were part of request pipeline. Middleware is similar to HttpHandlers and HttpModules where both needs to be configured and executed in each request.
