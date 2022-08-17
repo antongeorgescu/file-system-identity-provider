@@ -15,7 +15,7 @@ namespace BareboneServicePolicy.Authentication
         public static Task ConformToken(TokenValidatedContext context)
         {
             var handler = new JwtSecurityTokenHandler();
-            var jwtSecurityToken = handler.ReadJwtToken(context.HttpContext.Request.Headers["Authorization"]).ToString().Substring(TokenPrefix.Length)); ;
+            var jwtSecurityToken = handler.ReadJwtToken(context.HttpContext.Request.Headers["Authorization"].ToString().Substring(TokenPrefix.Length));
 
             var issuer = jwtSecurityToken.Claims.First(claim => claim.Type == UserSettings.Issuer).Value;
             var audience = jwtSecurityToken.Claims.First(claim => claim.Type == UserSettings.Audience).Value;
